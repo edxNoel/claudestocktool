@@ -84,7 +84,7 @@ export default function Home() {
         const update = JSON.parse(event.data);
         console.log('Received update:', update);
 
-        if (update.type === 'node_created') {
+        if (update.type === 'node_update') {
           // Handle actual investigation nodes
           setNodes(prev => [...prev, update.node]);
         } else if (update.type === 'investigation_complete') {
@@ -94,7 +94,7 @@ export default function Home() {
           if (timeoutRef.current) {
             clearTimeout(timeoutRef.current);
           }
-        } else if (update.type === 'investigation_error') {
+        } else if (update.type === 'error') {
           console.error('Investigation error:', update);
           setIsLoading(false);
           ws.close();
